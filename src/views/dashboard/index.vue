@@ -1,21 +1,13 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
-    <div class="dashboard-text">roles: <span v-for="role in roles" :key="role">{{ role }}</span></div>
+    欢迎使用教材管理系统
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'Dashboard',
-  computed: {
-    ...mapGetters([
-      'name',
-      'roles'
-    ])
-  }
 }
 </script>
 
@@ -23,6 +15,12 @@ export default {
 .dashboard {
   &-container {
     margin: 30px;
+    padding: 30px;
+    font-size: 32px;
+    border-radius: 8px;
+    background-color: #4fc08d;
+    color: #fff;
+    box-shadow: 0px 1px 12px -7px #000;
   }
   &-text {
     font-size: 30px;
