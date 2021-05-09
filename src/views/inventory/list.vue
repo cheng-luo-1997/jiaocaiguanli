@@ -172,37 +172,43 @@ export default {
         onConfirmEntry() {
           this.$refs.entryForm.validate(valid => {
             if (valid) {
-              this.list.unshift(
-                {
-                  id: 'book' + Date.now(),
-                  bookName: this.tempOne.book,
-                  editor: '李四',
-                  Press: '北京大学出版社',
-                  price: '77',
-                  inventory: this.tempOne.count,
-                }
-              );
-              this.dialogOneVisible = false;
-              this.$message({
-                message: '入库成功！',
-                type: 'success'
-              });
+              if (/^[1-9]\d*$/.test(this.tempOne.count)) {
+                this.list.unshift(
+                  {
+                    id: 'book' + Date.now(),
+                    bookName: this.tempOne.book,
+                    editor: '李四',
+                    Press: '北京大学出版社',
+                    price: '77',
+                    inventory: this.tempOne.count,
+                  }
+                );
+                this.dialogOneVisible = false;
+                this.$message({
+                  message: '入库成功！',
+                  type: 'success'
+                });
+              } else {
+                this.$message.error('输入数量有误！');
+              }
             }
           })
         },
         onConfirmOut() {
           this.$refs.outForm.validate(valid => {
             if (valid) {
-              const count = this.tempTwo.count * 1;
-              if (count <= this.outBook.inventory) {
+              const count = this.tempTwo.count;
+              if (/^[1-9]\d*$/.test(count) && count <= this.outBook.inventory) {
                 this.dialogTwoVisible = false;
                 this.$set(this.outBook, 'inventory', this.outBook.inventory - count);
                 this.$message({
                   message: '出库成功！',
                   type: 'success'
                 });
-              } else {
+              } else if (!/^[1-9]\d*$/.test(count)){
                 this.$message.error('输入数量有误！');
+              } else {
+                this.$message.error('出库数量必须小于等于库存数量！');
               }
             }
           })

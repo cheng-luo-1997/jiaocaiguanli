@@ -20,7 +20,7 @@ export default {
     border-radius: 8px;
     background-color: #4fc08d;
     color: #fff;
-    box-shadow: 0px 1px 12px -7px #000;
+    box-shadow: 0px 0px 12px -9px #000;
   }
   &-text {
     font-size: 30px;
